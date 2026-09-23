@@ -1,0 +1,18 @@
+import { useEffect, useState } from 'react'
+
+/**
+ * Returns a debounced version of `value` that only updates after `delay`
+ * milliseconds have passed without `value` changing.
+ */
+export function useDebounce(value, delay = 500) {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay)
+    return () => clearTimeout(timer)
+  }, [value, delay])
+
+  return debouncedValue
+}
+
+export default useDebounce
